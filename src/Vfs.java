@@ -1,4 +1,9 @@
 public interface Vfs {
-    int open(String filename, int mode);
-    int read(int fd, byte[] b, int size);
+    static int open(String filename, int mode) {
+        return 0;
+    }
+
+    static int read(int fd, byte[] b, int size) {
+        return 0;
+    }
 }
