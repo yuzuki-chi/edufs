@@ -1,3 +1,5 @@
+package File;
+
 public interface Vfs {
     static int open(String filename, int mode) {
         return 0;

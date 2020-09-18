@@ -1,3 +1,8 @@
+package File;
+
+import FileSystem.*;
+import ext2.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,5 +49,29 @@ public class VfsInmpl implements Vfs {
             //TODO: sizeに応じた回数readをして読み出す
         }
         return ret;
+    }
+
+    /**
+     * ファイルシステムをマウントするmountシステムコールと同様の動作を想定
+     * @param source fsを構成するデバイス名. デバイスが無い場合はダミーを指定
+     * @param target fsをマウントするディレクトリ名
+     * @param fstype マウントするfsのファイルシステムタイプ
+     * @return 成功時は0, エラー時は-1を返す
+     */
+    public static int mount(String source, String target, String fstype) {
+        if (fstype.equals("ext2")) {
+            try {
+                FileSystemTypeObject fsto = new FileSystemTypeObjectImpl();
+                int flags = 0;
+                String devName = "";
+
+                Ext2fs ext2fs = new Ext2fs();
+                Dentry rootDentry = ext2fs.mount(fsto, flags, devName);
+                return 0;
+            } catch (Exception e) {
+                return -1;
+            }
+        }
+        return -1;
     }
 }

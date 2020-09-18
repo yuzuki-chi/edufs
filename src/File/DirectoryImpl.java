@@ -1,8 +1,10 @@
+package File;
+
 public class DirectoryImpl implements Directory {
     /**
      * ディレクトリ内の指定のファイルを返す.
      * @param pathname
-     * @return File
+     * @return File.File
      */
     public File getFile(String pathname) {
         return null;

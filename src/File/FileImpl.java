@@ -1,5 +1,6 @@
+package File;
+
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class FileImpl implements File {
