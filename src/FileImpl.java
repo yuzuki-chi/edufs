@@ -17,7 +17,6 @@ public class FileImpl implements File {
     }
 
     /**
-     * TODO: 実際にページ(4096)を読みだす処理を追加.
      * @param b ファイルから読み込んだデータを格納する配列
      * @param pageOffset 読み込むファイルの相対オフセット
      * @return 実際に読み込んだバイト数. エラー時は-1を返す
@@ -25,7 +24,7 @@ public class FileImpl implements File {
     public int getPage(byte[] b, int pageOffset) {
         int ret = 0;
         try {
-            FileInputStream fis = new FileInputStream("./.gitignore");
+            FileInputStream fis = new FileInputStream(pathname);
             ret = fis.read(b, (int) (fileAddr + (PAGE_SIZE * pageOffset)), PAGE_SIZE);
         } catch (IOException e) {
             return -1;

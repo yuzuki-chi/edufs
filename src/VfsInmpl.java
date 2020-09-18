@@ -29,8 +29,20 @@ public class VfsInmpl implements Vfs {
      * @return 実際に読み込んだバイト数. ファイルオフセットがsizeを超えた場合は0を返す.
      */
     public static int read(int fd, byte[] b, int size) {
-        FileImpl f = (FileImpl) openFileDescList.get(fd);
-        int ret = f.getPage(b, 0);
+        final int PAGE_SIZE = 4096;
+        byte[] getData = new byte[PAGE_SIZE];
+        int ret = 0;
+
+        FileImpl f = openFileDescList.get(fd);
+        if (size < PAGE_SIZE) {
+            f.getPage(getData, 0);
+            for (int i=0; i<size; i++) {
+                b[i] = getData[i];
+            }
+            ret = size;
+        } else {
+            //TODO: sizeに応じた回数readをして読み出す
+        }
         return ret;
     }
 }
