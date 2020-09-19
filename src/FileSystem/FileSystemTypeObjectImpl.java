@@ -25,8 +25,8 @@ public class FileSystemTypeObjectImpl implements FileSystemTypeObject {
      * @param source マウント前のデバイスファイルのパス
      * @return 読み込んだFS固有のスーパーブロック
      */
-    public SuperBlock getSb(FileSystemTypeObject type, int flags, String source) {
-        sb = new Ext2fsSuperBlock(); //本当はここにext2があるべきでは無い
+    public SuperBlock getSb(FileSystemTypeObject type, int flags, String source) throws Exception {
+        sb = new Ext2fsSuperBlock(source); //本当はここにext2があるべきでは無い
         sb.init();
         return sb;
     }

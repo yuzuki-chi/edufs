@@ -59,7 +59,7 @@ public class VfsInmpl implements Vfs {
      * @param fstype マウントするfsのファイルシステムタイプ
      * @return 成功時は0, エラー時は-1を返す
      */
-    public static int mount(String source, String target, String fstype) {
+    public static int mount(String source, String target, String fstype) throws Exception {
         int retval = 0;
         long dataPage; //おそらくインスタンス化必須
         long typePage; //こちらもインスタンス化必須

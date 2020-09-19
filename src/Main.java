@@ -1,9 +1,9 @@
 import File.VfsInmpl;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         /* mount */
-        int err = VfsInmpl.mount("/dev/disk3s1", "/Volume/ext2dev", "ext2");
+        int err = VfsInmpl.mount("/dev/disk4s1", "/Volume/ext2dev", "ext2");
         if (err == 0) System.out.println("mount success!");
 
         /* open */
