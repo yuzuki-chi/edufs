@@ -8,6 +8,7 @@ import java.util.List;
 
 public class VfsInmpl implements Vfs {
     private static List<FileImpl> openFileDescList = new ArrayList<FileImpl>();
+    private static VfsMount mnt;
 
     private static VfsInmpl vfsImpl = new VfsInmpl();
     private VfsInmpl()
@@ -59,19 +60,34 @@ public class VfsInmpl implements Vfs {
      * @return 成功時は0, エラー時は-1を返す
      */
     public static int mount(String source, String target, String fstype) {
-        if (fstype.equals("ext2")) {
-            try {
-                FileSystemTypeObject fsto = new FileSystemTypeObjectImpl();
-                int flags = 0;
-                String devName = "";
+        int retval = 0;
+        long dataPage; //おそらくインスタンス化必須
+        long typePage; //こちらもインスタンス化必須
+        long devPage;
+        int flags = 0; //TODO これはここにあるべきでは無い
 
-                Ext2fs ext2fs = new Ext2fs();
-                Dentry rootDentry = ext2fs.mount(fsto, flags, devName);
-                return 0;
-            } catch (Exception e) {
-                return -1;
-            }
-        }
-        return -1;
+//        lock_kernel();      //カーネルロック
+
+        FileSystemTypeObjectImpl type = new FileSystemTypeObjectImpl(fstype); //ファイルシステム名から対応するfile_system_typeディスクリプタを取得
+        SuperBlock sb;
+        mnt = new VfsMount();
+
+        //TODO ファイルシステムディスクリプタを初期化（各リストや参照カウンタ、デバイス名など） alloc_vfsmnt(name)を参照
+
+        //TODO 初期化したスーパーブロックオブジェクトを取得
+        sb = type.getSb(type, flags, source); //fsTypeObjからsbを見つける
+        //この時点のsbは既にext2のsbである必要がある.
+
+        //TODO マウント情報を初期化していく
+        mnt.setSb(sb);
+        mnt.setRoot(sb.getSroot());
+        mnt.setMountpoint(sb.getSroot());
+        mnt.setParent(mnt);
+//        mnt.setNamespace(namespace);
+//        putFilesystem(type); //fsTypeObjectDescを追加してるんかな？
+
+//        unlock_kernel();    //カーネルロック解除
+
+        return retval;
     }
 }
