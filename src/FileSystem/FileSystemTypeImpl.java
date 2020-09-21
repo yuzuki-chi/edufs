@@ -2,10 +2,10 @@ package FileSystem;
 
 import ext2.Ext2fsSuperBlock;
 
-public class FileSystemTypeObjectImpl implements FileSystemTypeObject {
+public class FileSystemTypeImpl implements FileSystemType {
     Ext2fsSuperBlock sb;
 
-    public FileSystemTypeObjectImpl(String fsType) {
+    public FileSystemTypeImpl(String fsType) {
     }
 
     /**
@@ -25,7 +25,7 @@ public class FileSystemTypeObjectImpl implements FileSystemTypeObject {
      * @param source マウント前のデバイスファイルのパス
      * @return 読み込んだFS固有のスーパーブロック
      */
-    public SuperBlock getSb(FileSystemTypeObject type, int flags, String source) throws Exception {
+    public SuperBlock getSb(FileSystemType type, int flags, String source) throws Exception {
         sb = new Ext2fsSuperBlock(source); //本当はここにext2があるべきでは無い
         sb.init();
         return sb;

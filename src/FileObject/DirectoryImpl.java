@@ -1,4 +1,4 @@
-package File;
+package FileObject;
 
 public class DirectoryImpl implements Directory {
     /**

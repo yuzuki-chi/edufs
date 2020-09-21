@@ -1,4 +1,4 @@
-package File;
+package FileObject;
 
 import FileSystem.SuperBlock;
 

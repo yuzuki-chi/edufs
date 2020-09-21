@@ -1,6 +1,6 @@
 package ext2;
 
-import File.File;
+import FileObject.File;
 import FileSystem.*;
 
 public class Ext2fs implements FileSystem {
@@ -14,7 +14,7 @@ public class Ext2fs implements FileSystem {
      * @param devName
      * @return ルートディレクトリのdentryを返す
      */
-    public Dentry mount(FileSystemTypeObject fsType, int flags, String devName) {
+    public Dentry mount(FileSystemType fsType, int flags, String devName) {
         return null;
     }
 

@@ -1,18 +1,10 @@
 package FileSystem;
 
-import java.io.File;
+public interface SuperBlock {
 
-public class SuperBlock extends ControlBlock<SuperBlockEnum> {
-
-    public SuperBlock(String source) throws Exception {
-        super(new java.io.File(source));
-        this.init();
-    }
-
-    public void init() {
-    }
-
-    public String getSroot() {
-        return "";
-    }
+    /**
+     * スーパーブロックオブジェクト (Super Block Object)
+     *  マウントされたファイルシステムに関する情報を保存するオブジェクト.
+     *  ディスクに保存されているファイルシステム制御ブロック(filesystem control block)に該当する.
+     */
 }

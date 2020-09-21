@@ -1,7 +1,6 @@
-package File;
+package FileObject;
 
 import FileSystem.*;
-import ext2.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +67,7 @@ public class VfsInmpl implements Vfs {
 
 //        lock_kernel();      //カーネルロック
 
-        FileSystemTypeObjectImpl type = new FileSystemTypeObjectImpl(fstype); //ファイルシステム名から対応するfile_system_typeディスクリプタを取得
+        FileSystemTypeImpl type = new FileSystemTypeImpl(fstype); //ファイルシステム名から対応するfile_system_typeディスクリプタを取得
         SuperBlock sb;
         mnt = new VfsMount();
 
