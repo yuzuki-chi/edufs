@@ -57,14 +57,14 @@ public class VfsInmpl implements Vfs {
      * @param source fsを構成するデバイス名. デバイスが無い場合はダミーを指定
      * @param target fsをマウントするディレクトリ名
      * @param fstype マウントするfsのファイルシステムタイプ
+     * @param flags マウントする際のフラグ (モード)
      * @return 成功時は0, エラー時は-1を返す
      */
-    public static int mount(String source, String target, String fstype) throws Exception {
+    public static int mount(String source, String target, String fstype, int flags) throws Exception {
         int retval = 0;
         long dataPage; //おそらくインスタンス化必須
         long typePage; //こちらもインスタンス化必須
         long devPage;
-        int flags = 0; //TODO これはここにあるべきでは無い
 
 //        lock_kernel();      //カーネルロック
 
