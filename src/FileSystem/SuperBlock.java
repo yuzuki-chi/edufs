@@ -3,6 +3,7 @@ package FileSystem;
 import java.io.File;
 
 public class SuperBlock extends ControlBlock<SuperBlockEnum> {
+    Dentry droot;
 
     public SuperBlock(String source) throws Exception {
         super(new java.io.File(source));
@@ -12,7 +13,7 @@ public class SuperBlock extends ControlBlock<SuperBlockEnum> {
     public void init() {
     }
 
-    public String getSroot() {
-        return "";
+    public Dentry getSroot() {
+        return droot;
     }
 }

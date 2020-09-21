@@ -51,43 +51,4 @@ public class VfsInmpl implements Vfs {
         }
         return ret;
     }
-
-    /**
-     * ファイルシステムをマウントするmountシステムコールと同様の動作を想定
-     * @param source fsを構成するデバイス名. デバイスが無い場合はダミーを指定
-     * @param target fsをマウントするディレクトリ名
-     * @param fstype マウントするfsのファイルシステムタイプ
-     * @param flags マウントする際のフラグ (モード)
-     * @return 成功時は0, エラー時は-1を返す
-     */
-    public static int mount(String source, String target, String fstype, int flags) throws Exception {
-        int retval = 0;
-        long dataPage; //おそらくインスタンス化必須
-        long typePage; //こちらもインスタンス化必須
-        long devPage;
-
-//        lock_kernel();      //カーネルロック
-
-        FileSystemTypeObjectImpl type = new FileSystemTypeObjectImpl(fstype); //ファイルシステム名から対応するfile_system_typeディスクリプタを取得
-        SuperBlock sb;
-        mnt = new VfsMount();
-
-        //TODO ファイルシステムディスクリプタを初期化（各リストや参照カウンタ、デバイス名など） alloc_vfsmnt(name)を参照
-
-        //TODO 初期化したスーパーブロックオブジェクトを取得
-        sb = type.getSb(type, flags, source); //fsTypeObjからsbを見つける
-        //この時点のsbは既にext2のsbである必要がある.
-
-        //TODO マウント情報を初期化していく
-        mnt.setSb(sb);
-        mnt.setRoot(sb.getSroot());
-        mnt.setMountpoint(sb.getSroot());
-        mnt.setParent(mnt);
-//        mnt.setNamespace(namespace);
-//        putFilesystem(type); //fsTypeObjectDescを追加してるんかな？
-
-//        unlock_kernel();    //カーネルロック解除
-
-        return retval;
-    }
 }
