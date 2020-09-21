@@ -1,7 +1,9 @@
 public class Main {
     public static void main(String[] args) throws Exception {
         /* mount */
+        //System Call Service Routineからmountシステムコールを読んでいることを想定 (既に特権モードっぽい)
         int err = SystemCall.sys_mount("/dev/disk3s1", "/Volume/ext2dev", "ext2", 777);
+
         if (err == 0) System.out.println("mount success!");
         else if (err == -1) System.out.println("mount faild...");
 
