@@ -1,0 +1,5 @@
+This is sample text.
+
+public static void main() {
+    System.out.println("hello world!");
+}
