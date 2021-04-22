@@ -1,5 +1,6 @@
 package ext2;
 
+import FileSystem.Dentry;
 import FileSystem.SuperBlock;
 import FileSystem.SuperBlockEnum;
 
@@ -22,6 +23,8 @@ public class Ext2fsSuperBlock extends SuperBlock {
 
     private long s_default_mount_options, s_first_meta_bg; //int
     private long[] s_reserved; //int[]
+
+    private Dentry droot;
 
     public Ext2fsSuperBlock(String source) throws Exception {
         super(source);
@@ -86,9 +89,8 @@ public class Ext2fsSuperBlock extends SuperBlock {
         this.s_reserved = super.readArray(SuperBlockEnum.s_reserved);
     }
 
-    public String getSroot() {
-        String sroot = "";
-        //GroupDescにあるinodeテーブルからルートディレクトリを探索してそのパスを返す
-        return sroot;
+    public Dentry getSroot() {
+        //GroupDescにあるinodeテーブルからルートディレクトリを探索してそのパス(Dentry)を返す
+        return droot;
     }
 }
